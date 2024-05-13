@@ -6,13 +6,13 @@ message(STATUS "CMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}")
 include_directories(openssl/include)
 
 add_subdirectory(comm comm)
-add_subdirectory(boot boot)
+#add_subdirectory(boot boot)
 add_subdirectory(boost boost)
-add_subdirectory(app app)
-add_subdirectory(baseevent baseevent)
+#add_subdirectory(app app)
+#add_subdirectory(baseevent baseevent)
 add_subdirectory(xlog xlog)
-add_subdirectory(sdt sdt)
-add_subdirectory(stn stn)
+#add_subdirectory(sdt sdt)
+#add_subdirectory(stn stn)
 
 # for zstd
 option(ZSTD_BUILD_STATIC "BUILD STATIC LIBRARIES" ON)
@@ -64,24 +64,24 @@ if(ANDROID)
                             )
  
     # marsstn
-    set(SELF_LIB_NAME marsstn)
-    file(GLOB SELF_SRC_FILES libraries/mars_android_sdk/jni/*.cc)
-    add_library(${SELF_LIB_NAME} SHARED ${SELF_SRC_FILES})
-    install(TARGETS ${SELF_LIB_NAME} LIBRARY DESTINATION ${SELF_LIBS_OUT} ARCHIVE DESTINATION ${SELF_LIBS_OUT})
-    link_directories(${SELF_LIBS_OUT})
-    find_library(CRYPT_LIB crypto PATHS openssl/openssl_lib_android/${ANDROID_ABI} NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
-    find_library(SSL_LIB ssl PATHS openssl/openssl_lib_android/${ANDROID_ABI} NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
-    target_link_libraries(${SELF_LIB_NAME} "-Wl,--gc-sections"
-                        ${log-lib}
-                        stn
-                        sdt
-                        app
-                        baseevent
-                        comm
-                        boot
-                        mars-boost
-                        marsxlog
-                        libzstd_static
-                        ${SSL_LIB}
-                        ${CRYPT_LIB})
+#    set(SELF_LIB_NAME marsstn)
+#    file(GLOB SELF_SRC_FILES libraries/mars_android_sdk/jni/*.cc)
+#    add_library(${SELF_LIB_NAME} SHARED ${SELF_SRC_FILES})
+#    install(TARGETS ${SELF_LIB_NAME} LIBRARY DESTINATION ${SELF_LIBS_OUT} ARCHIVE DESTINATION ${SELF_LIBS_OUT})
+#    link_directories(${SELF_LIBS_OUT})
+#    find_library(CRYPT_LIB crypto PATHS openssl/openssl_lib_android/${ANDROID_ABI} NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
+#    find_library(SSL_LIB ssl PATHS openssl/openssl_lib_android/${ANDROID_ABI} NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
+#    target_link_libraries(${SELF_LIB_NAME} "-Wl,--gc-sections"
+#                        ${log-lib}
+#                        stn
+#                        sdt
+#                        app
+#                        baseevent
+#                        comm
+#                        boot
+#                        mars-boost
+#                        marsxlog
+#                        libzstd_static
+#                        ${SSL_LIB}
+#                        ${CRYPT_LIB})
 endif()
